@@ -12,8 +12,8 @@ class ShowCommentsController extends GetxController {
   void getComments(int id) async {
     try {
       isLoading(true);
-      final posts = await _showCommentsContract.getcomments(id);
-      commentModels.addAll(posts.data!);
+      final comments = await _showCommentsContract.getcomments(id);
+      commentModels.addAll(comments.data!);
       update();
     } catch (e) {
       throw Exception();
