@@ -38,6 +38,10 @@ class Datum {
     this.user,
     this.timeDiff,
   });
+    static List<Datum> orderByTimeDiff(List<Datum> list) {
+    list.sort((a, b) => b.timeDiff!.compareTo(a.timeDiff!));
+    return list;
+  }
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],

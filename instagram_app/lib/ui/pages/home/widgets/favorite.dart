@@ -16,10 +16,11 @@ class Favorite extends StatelessWidget {
     return GestureDetector(onTap: () {
       favoriteController.toggleLikePost(id);
     }, child: Obx(() {
+      bool isLiked = favoriteController.postIsClicked[id] ?? false;
       return SizedBox(
         height: 24,
         width: 24,
-        child: favoriteController.isClicked.value
+        child: isLiked
             ? const FaIcon(
                 FontAwesomeIcons.solidHeart,
                 color: AppColors.red,

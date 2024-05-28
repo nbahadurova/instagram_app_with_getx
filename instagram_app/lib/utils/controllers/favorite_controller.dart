@@ -4,19 +4,22 @@ import 'package:instagram_app/utils/controllers/post_controller.dart';
 import 'package:instagram_app/data/services/remote/favorite_service.dart';
 
 class FavoriteController extends GetxController {
+  FavoriteController(this._favoriteService);
   final FavoriteService _favoriteService;
   final PostController postController = Get.find();
-  var isClicked = false.obs;
 
-  FavoriteController(this._favoriteService);
+  var postIsClicked = <int, bool>{}.obs;
 
   Future<void> toggleLikePost(int id) async {
     try {
-      isClicked.value = !isClicked.value;
-      if (isClicked.value) {
+      bool currentStatus = postIsClicked[id] ?? false;
+      postIsClicked[id] = !currentStatus;
+
+      if (postIsClicked[id]!) {
         final response = await _favoriteService.likePosts(id);
         if (response.success == true) {
-          final postIndex = postController.postModels.indexWhere((post) => post.id == id);
+          final postIndex =
+              postController.postModels.indexWhere((post) => post.id == id);
           if (postIndex != -1) {
             final updatedPost = postController.postModels[postIndex];
             postController.postModels[postIndex] = updatedPost;
@@ -25,9 +28,10 @@ class FavoriteController extends GetxController {
       } else {
         final response = await _favoriteService.unlikePost(id);
         if (response.success == true) {
-          final postIndex = postController.postModels.indexWhere((post) => post.id == id);
+          final postIndex =
+              postController.postModels.indexWhere((post) => post.id == id);
           if (postIndex != -1) {
-             postController.postModels.removeAt(postIndex);  
+            postController.postModels.removeAt(postIndex);
           }
         }
       }

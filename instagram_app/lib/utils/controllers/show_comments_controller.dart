@@ -13,7 +13,7 @@ class ShowCommentsController extends GetxController {
     try {
       isLoading(true);
       final comments = await _showCommentsContract.getcomments(id);
-      commentModels.addAll(comments.data!);
+       commentModels.assignAll(Datum.orderByTimeDiff(comments.data!));
       update();
     } catch (e) {
       throw Exception();

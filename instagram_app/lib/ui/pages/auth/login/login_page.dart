@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_app/utils/di/locator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_app/ui/pages/home/home_page.dart';
 import 'package:instagram_app/utils/constants/app_assets.dart';
 import 'package:instagram_app/utils/constants/app_colors.dart';
 import 'package:instagram_app/utils/constants/app_strings.dart';
@@ -66,9 +65,7 @@ class LoginPage extends StatelessWidget {
                     child: CustomElevatedButton(
                       text: AppStrings.login,
                       onPressed: () {
-                        // isLogin.value = true;
                         loginController.login();
-                        Get.offAll(const HomePage());
                       },
                     ),
                   ),

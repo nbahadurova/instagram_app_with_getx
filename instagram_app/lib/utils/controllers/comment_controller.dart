@@ -18,7 +18,7 @@ class CommentController extends GetxController {
     super.onClose();
   }
 
-  void addComment(int id) async {
+   addComment(int id) async {
     try {
       final response = await _commentContract.addComments(
           textController.value.text,
@@ -26,6 +26,7 @@ class CommentController extends GetxController {
           textController.value.text,
           textController.value.text);
       await _commentLocalService.saveComments(response);
+      showCommentsController.getComments(id);
       textController.value.clear();
     } catch (e, s) {
       log(e.toString());
